@@ -22,7 +22,11 @@ public enum OperatorEnum {
 
     UNDO("undo", "undo", "undo operator"),
 
-    CLEAR("clear", "clear", "clear operator");
+    CLEAR("clear", "clear", "clear operator"),
+
+    NUM("number", "number", "number"),
+
+    OTHER("other", "other", "other operator");
 
     /**
      * operator
@@ -50,12 +54,30 @@ public enum OperatorEnum {
      * @param symbol
      * @return {@link OperatorEnum}
      */
-    public OperatorEnum getOperator(String symbol) {
+    public static OperatorEnum getOperator(String symbol) {
         for (OperatorEnum value : values()) {
-            if (StringUtils.equals(value.symbol, symbol)) {
+            if (StringUtils.equals(value.symbol, symbol) && !StringUtils.equals(symbol, NUM.symbol)) {
                 return value;
             }
         }
-        return null;
+
+        try {
+            Double.parseDouble(symbol);
+            return NUM;
+        } catch (NumberFormatException e) {
+            throw  new RuntimeException("un supported symbol");
+        }
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -9,18 +9,15 @@ import org.springframework.util.Assert;
  * @time: 23:24
  * @desc:
  */
-public abstract class AbstractOperator {
+public abstract class AbstractOperator extends AbstractOperation {
 
     public AbstractOperator(OperatorEnum operator) {
+        super();
         Assert.notNull(operator, "operator can not be null");
         this.operator = operator;
     }
 
     protected OperatorEnum operator;
-
-    public abstract Double process();
-
-
 
     @Override
     public String toString() {
