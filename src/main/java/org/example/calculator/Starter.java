@@ -27,6 +27,8 @@ public class Starter {
      * quit命令退出
      */
     public void interactive() {
+
+        help();
         while (true) {
             System.out.print("\n>>  ");
             /**
@@ -34,7 +36,7 @@ public class Starter {
              * eg:
              *  >> 5  2 + undo undo 6 -
              *  [errorMsg]
-             *  stack: [5 2]
+             *  stack: 5 2
              *  >>quit
              *  then exit this process
              */
@@ -58,6 +60,18 @@ public class Starter {
         ErrorStack.printErrorStack();
         ErrorStack.clear();
         CmdStack.printCmdStack();
-//        UndoStack.printUndoStack();
+    }
+
+    private void help() {
+        System.out.println("==============================================================");
+        System.out.println("***              RPN-Calculator Version: v1.000            ***");
+        System.out.println("***   HomePage: https://github.com/ryaney/rpn-calculator   ***");
+        System.out.println("***  命令行如下：                                            ***");
+        System.out.println("***  >>1 2 3 * 5 + * * 6 5                                 ***");
+        System.out.println("***  operator * (position: 15): insufficient parameters    ***");
+        System.out.println("***  stack: 11                                             ***");
+        System.out.println("***  >>quit                                                ***");
+        System.out.println("***  >>Process finished with exit code 0                   ***");
+        System.out.println("==============================================================");
     }
 }

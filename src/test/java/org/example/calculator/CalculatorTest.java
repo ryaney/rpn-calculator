@@ -153,6 +153,7 @@ public class CalculatorTest {
         Parser parser = new Parser();
         parser.parseAndExecute("1 2 3 * 5 + * * 6 5");
         ErrorStack.printErrorStack();
+        Assert.assertEquals(ErrorStack.getErrorStack().pop(), "operator * (position: 15): insufficient parameters");
 
         CmdStack.printCmdStack();
         CmdStack.clear();

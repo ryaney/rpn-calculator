@@ -29,9 +29,9 @@ public abstract class AbstractBinaryOperator extends AbstractOperator {
      */
     @Override
     public AbstractBinaryOperator parse(String symbol) {
-        Assert.hasText(symbol, "operation can not be empty");
-        Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not match");
         try {
+            Assert.hasText(symbol, "operation can not be empty");
+            Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not match");
             Assert.isTrue(CmdStack.size() >= 2, "operation size can not less than 2");
             num1 = CmdStack.pop().getOperationNum();
             Assert.notNull(num1, "operation num1 can not be null");
