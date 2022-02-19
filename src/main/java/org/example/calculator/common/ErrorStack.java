@@ -1,5 +1,6 @@
 package org.example.calculator.common;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -10,7 +11,16 @@ import java.util.Stack;
  */
 public class ErrorStack {
     //error stack
-    private static Stack<String> errorStack = new Stack<>();
+    private static Stack<String> errorStack = new Stack<String>() {
+        @Override
+        public String toString() {
+            String string = "";
+            for (int i = 0; i < elementCount; i++) {
+                string += elementData[i] + "\n";
+            }
+            return string;
+        }
+    };
 
     public static void push(String item) {
         errorStack.push(item);

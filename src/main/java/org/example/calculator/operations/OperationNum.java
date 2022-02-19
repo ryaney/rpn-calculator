@@ -3,6 +3,7 @@ package org.example.calculator.operations;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.UndoStack;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -63,7 +64,14 @@ public class OperationNum extends AbstractOperation {
         if (operationNum.intValue() == operationNum) {
             return String.format("%d", operationNum.intValue());
         }
-        return String.format("%.10f", operationNum);
+        String string = String.format("%.10f", operationNum);
+        int i = string.length() - 1;
+        for (; i > 0; i--) {
+            if (string.charAt(i) != '0') {
+                break;
+            }
+        }
+        return string.substring(0 , i + 1);
     }
 
     public Double getOperationNum() {

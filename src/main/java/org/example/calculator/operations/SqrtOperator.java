@@ -54,10 +54,15 @@ public class SqrtOperator extends AbstractOperator {
      */
     @Override
     public SqrtOperator parse(String symbol) {
-        Assert.hasText(symbol, "operation can not be empty");
-        Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not sqrt");
-        num0 = CmdStack.pop().getOperationNum();
-        Assert.notNull(num0, "operation num0 can not be null");
+        try {
+            Assert.isTrue(CmdStack.size() >= 1, "operation size can not less than 1");
+            Assert.hasText(symbol, "operation can not be empty");
+            Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not sqrt");
+            num0 = CmdStack.pop().getOperationNum();
+            Assert.notNull(num0, "operation num0 can not be null");
+        } catch (RuntimeException e) {
+            throw new CalculatorException(ErrorCodeEnum.OPERATOR_PARAM_ILLEGAL);
+        }
 
         return this;
     }

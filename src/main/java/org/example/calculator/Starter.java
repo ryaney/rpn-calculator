@@ -3,7 +3,6 @@ package org.example.calculator;
 import org.apache.commons.lang3.StringUtils;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.ErrorStack;
-import org.example.calculator.common.UndoStack;
 import org.example.calculator.parse.Parser;
 
 import java.util.*;
@@ -59,6 +58,6 @@ public class Starter {
         ErrorStack.printErrorStack();
         ErrorStack.clear();
         CmdStack.printCmdStack();
-        UndoStack.printUndoStack();
+//        UndoStack.printUndoStack();
     }
 }

@@ -1,7 +1,5 @@
 package org.example.calculator.parse;
 
-import org.example.calculator.common.CmdStack;
-import org.example.calculator.common.UndoStack;
 import org.example.calculator.operations.*;
 import org.example.calculator.common.ErrorStack;
 import org.example.calculator.exception.CalculatorException;
@@ -18,14 +16,11 @@ import java.util.List;
 public class Parser {
 
     public void parseAndExecute(final String inputLine) {
-
         //用于解析命令
         List<ScanWord> cmdIn = parseInput(inputLine);
 
         for (ScanWord scanWord : cmdIn) {
-
             try {
-
                 //解析操作符
                 OperatorEnum operatorEnum = OperatorEnum.getOperator(scanWord.getOperation());
                 switch (operatorEnum) {
@@ -58,9 +53,8 @@ public class Parser {
                         break;
                 }
             } catch (CalculatorException e) {
-                CmdStack.clear();
-                UndoStack.clear();
                 parseException(e, scanWord);
+                return;
             }
         }
     }

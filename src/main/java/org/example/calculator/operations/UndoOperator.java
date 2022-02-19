@@ -49,13 +49,13 @@ public class UndoOperator extends AbstractOperator {
      */
     @Override
     public UndoOperator parse(String symbol) {
-        Assert.hasText(symbol, "operation can not be empty");
-        Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not undo");
-        //弹出操作符或操作数
         try {
+            Assert.hasText(symbol, "operation can not be empty");
+            Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not undo");
+            //弹出操作符或操作数
             undoOp = UndoStack.pop();
             Assert.notNull(undoOp, "undo operator can not be null");
-        } catch (CalculatorException e) {
+        } catch (RuntimeException e) {
             throw new CalculatorException(ErrorCodeEnum.OPERATOR_PARAM_ILLEGAL);
         }
 

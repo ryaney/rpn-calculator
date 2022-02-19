@@ -32,11 +32,12 @@ public abstract class AbstractBinaryOperator extends AbstractOperator {
         Assert.hasText(symbol, "operation can not be empty");
         Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not match");
         try {
+            Assert.isTrue(CmdStack.size() >= 2, "operation size can not less than 2");
             num1 = CmdStack.pop().getOperationNum();
             Assert.notNull(num1, "operation num1 can not be null");
             num0 = CmdStack.pop().getOperationNum();
             Assert.notNull(num0, "operation num0 can not be null");
-        } catch (CalculatorException e) {
+        } catch (RuntimeException e) {
             throw new CalculatorException(ErrorCodeEnum.OPERATOR_PARAM_ILLEGAL);
         }
 

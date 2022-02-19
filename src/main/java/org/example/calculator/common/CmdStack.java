@@ -18,7 +18,16 @@ import java.util.Stack;
 public class CmdStack {
 
     //运行时栈
-    private static Stack<OperationNum> cmdStack = new Stack<>();
+    private static Stack<OperationNum> cmdStack = new Stack<OperationNum>() {
+        @Override
+        public String toString() {
+            String string = "";
+            for (int i = 0; i < elementCount; i++) {
+                string += elementData[i] + " ";
+            }
+            return string;
+        }
+    };
 
     public static void push(OperationNum item) {
         cmdStack.push(item);
@@ -42,6 +51,10 @@ public class CmdStack {
         }
     }
 
+    public static int size() {
+        return cmdStack.size();
+    }
+
     public static void clear() {
         try {
             cmdStack.clear();
@@ -54,8 +67,8 @@ public class CmdStack {
         return cmdStack.empty();
     }
 
-    public static Stack<OperationNum> getCmdStack() {
-        return cmdStack;
+    public static OperationNum peek() {
+        return cmdStack.peek();
     }
 
     /**
