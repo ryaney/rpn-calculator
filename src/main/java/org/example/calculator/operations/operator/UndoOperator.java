@@ -1,9 +1,11 @@
-package org.example.calculator.operations;
+package org.example.calculator.operations.operator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.calculator.OperatorEnum;
+import org.example.calculator.operations.OperatorEnum;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.UndoStack;
+import org.example.calculator.operations.AbstractOperation;
+import org.example.calculator.operations.OperationNum;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;

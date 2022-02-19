@@ -1,6 +1,7 @@
-package org.example.calculator.operations;
+package org.example.calculator.operations.operator;
 
-import org.example.calculator.OperatorEnum;
+import org.example.calculator.operations.OperatorEnum;
+import org.example.calculator.operations.AbstractOperation;
 import org.springframework.util.Assert;
 
 /**
@@ -21,8 +22,6 @@ public abstract class AbstractOperator extends AbstractOperation {
 
     @Override
     public String toString() {
-        return "AbstractOperation{" +
-                "operator='" + operator + '\'' +
-                '}';
+        return operator.getOperator();
     }
 }

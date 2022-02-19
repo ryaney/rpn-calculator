@@ -1,6 +1,7 @@
 package org.example.calculator;
 
 import org.example.calculator.common.CmdStack;
+import org.example.calculator.common.ErrorStack;
 import org.example.calculator.common.UndoStack;
 import org.example.calculator.parse.Parser;
 import org.springframework.util.Assert;
@@ -22,7 +23,7 @@ public class Starter {
         // Break each line entered into a command and a parameter string
         try {
             Starter starter = new Starter();
-            starter.start(" 5  2 + undo undo 6 + + 1 2 undo undo");
+            starter.start(" 5  2 + undo undo 6 + + 1 2 * * ");
 
 //            while (true) {
 //                // Input command from user
@@ -61,8 +62,8 @@ public class Starter {
 
         Parser parser = new Parser();
         parser.parseAndExecute(inputLine);
-        System.out.println(CmdStack.getCmdStack());
-        System.out.println(UndoStack.getUndoStack());
-
+        ErrorStack.printErrorStack();
+        CmdStack.printCmdStack();
+        UndoStack.printUndoStack();
     }
 }

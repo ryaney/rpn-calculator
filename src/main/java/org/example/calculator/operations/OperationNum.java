@@ -3,9 +3,7 @@ package org.example.calculator.operations;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * @author: ryan_scy@126.com
@@ -55,8 +53,10 @@ public class OperationNum extends AbstractOperation {
 
     @Override
     public String toString() {
-        return "OperationNum{" +
-                "operationNum=" + operationNum +
-                '}';
+        return operationNum.toString();
+    }
+
+    public Double getOperationNum() {
+        return operationNum;
     }
 }

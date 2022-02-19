@@ -1,4 +1,4 @@
-package org.example.calculator;
+package org.example.calculator.operations;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,8 +1,9 @@
-package org.example.calculator.operations;
+package org.example.calculator.operations.operator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.calculator.OperatorEnum;
+import org.example.calculator.operations.OperatorEnum;
 import org.example.calculator.common.CmdStack;
+import org.example.calculator.operations.OperationNum;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;
@@ -43,7 +44,7 @@ public class SqrtOperator extends AbstractOperator {
     public SqrtOperator parse(String symbol) {
         Assert.hasText(symbol, "operation can not be empty");
         Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not sqrt");
-        num0 = CmdStack.pop().operationNum;
+        num0 = CmdStack.pop().getOperationNum();
         Assert.notNull(num0, "operation num0 can not be null");
 
         return this;

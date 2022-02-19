@@ -1,14 +1,18 @@
 package org.example.calculator.parse;
 
-import org.example.calculator.OperatorEnum;
+import org.example.calculator.operations.OperatorEnum;
 import org.example.calculator.common.CmdStack;
+import org.example.calculator.common.ErrorStack;
 import org.example.calculator.common.UndoStack;
 import org.example.calculator.exception.CalculatorException;
 import org.example.calculator.operations.*;
+import org.example.calculator.operations.operator.AddOperator;
+import org.example.calculator.operations.operator.MultiplyOperator;
+import org.example.calculator.operations.operator.SqrtOperator;
+import org.example.calculator.operations.operator.UndoOperator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * @author: ryan_scy@126.com
@@ -22,11 +26,8 @@ public class Parser {
 
         //用于解析命令
         List<ScanWord> cmdIn = parseInput(inputLine);
-        Stack<ScanWord> cmdLine = new Stack<>() ;
 
         for (ScanWord scanWord : cmdIn) {
-
-            cmdLine.push(scanWord);
 
             try {
 
@@ -99,14 +100,12 @@ public class Parser {
     }
 
     public void parseException(CalculatorException e, ScanWord scanWord) {
-        List<String> errorStack = new ArrayList<>();
 
         //operator * (position: 15): insucient parameters
         String error = "operator "
                 + scanWord.getOperation()
                 + " (position: " + scanWord.getPosition() + "): "
                 + e.getMessage();
-        errorStack.add(error);
-        System.out.println(errorStack);
+        ErrorStack.push(error);
     }
 }

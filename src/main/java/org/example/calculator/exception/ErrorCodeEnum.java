@@ -9,8 +9,8 @@ package org.example.calculator.exception;
 public enum ErrorCodeEnum {
     //cmdStack empty
     CMD_STACK_ILLEGAL("CMD_STACK_ILLEGAL","cmdStack empty"),
-    ADD_OPERATOR_ILLEGAL("ADD_OPERATOR_ILLEGAL","add operator illegal"),
-    ADD_OPERATOR_PARAM_ILLEGAL("ADD_OPERATOR_PARAM_ILLEGAL","insucient parameters");
+    OPERATOR_ILLEGAL("OPERATOR_ILLEGAL","operator illegal"),
+    OPERATOR_PARAM_ILLEGAL("OPERATOR_PARAM_ILLEGAL","insucient parameters");
 
     private String code;
     private String desc;

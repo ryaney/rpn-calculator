@@ -37,4 +37,11 @@ public class UndoStack {
     public static Stack<AbstractOperation> getUndoStack() {
         return undoStack;
     }
+
+    /**
+     * 打印undo栈
+     */
+    public static void printUndoStack() {
+        System.out.println("undoStack: " + undoStack);
+    }
 }

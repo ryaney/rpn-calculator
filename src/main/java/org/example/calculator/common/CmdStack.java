@@ -45,4 +45,11 @@ public class CmdStack {
     public static Stack<OperationNum> getCmdStack() {
         return cmdStack;
     }
+
+    /**
+     * 打印运行时栈
+     */
+    public static void printCmdStack() {
+        System.out.println("stack: " + cmdStack);
+    }
 }
