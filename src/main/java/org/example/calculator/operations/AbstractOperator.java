@@ -1,7 +1,5 @@
-package org.example.calculator.operations.operator;
+package org.example.calculator.operations;
 
-import org.example.calculator.operations.OperatorEnum;
-import org.example.calculator.operations.AbstractOperation;
 import org.springframework.util.Assert;
 
 /**

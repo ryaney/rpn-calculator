@@ -1,9 +1,5 @@
 package org.example.calculator.common;
 
-import org.example.calculator.operations.AbstractOperation;
-
-import java.util.EmptyStackException;
-import java.util.List;
 import java.util.Stack;
 
 /**

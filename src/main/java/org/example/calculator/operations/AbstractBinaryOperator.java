@@ -1,7 +1,6 @@
-package org.example.calculator.operations.operator;
+package org.example.calculator.operations;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.calculator.operations.OperatorEnum;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.exception.CalculatorException;
 import org.example.calculator.exception.ErrorCodeEnum;
@@ -31,7 +30,7 @@ public abstract class AbstractBinaryOperator extends AbstractOperator {
     @Override
     public AbstractBinaryOperator parse(String symbol) {
         Assert.hasText(symbol, "operation can not be empty");
-        Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not add");
+        Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not match");
         try {
             num1 = CmdStack.pop().getOperationNum();
             Assert.notNull(num1, "operation num1 can not be null");

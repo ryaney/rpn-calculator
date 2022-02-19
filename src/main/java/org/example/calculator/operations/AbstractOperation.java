@@ -1,7 +1,6 @@
 package org.example.calculator.operations;
 
 import java.util.List;
-import java.util.Stack;
 
 /**
  * @author: ryan_scy@126.com
@@ -14,9 +13,22 @@ public abstract class AbstractOperation {
     public AbstractOperation() {
     }
 
-    public abstract List<OperationNum> undo();
+    /**
+     * inner method,should be protected
+     * @return {@link List< OperationNum >}
+     */
+    protected abstract List<OperationNum> undo();
 
-    public abstract OperationNum execute();
+    /**
+     * inner method,should be protected
+     * @return {@link OperationNum}
+     */
+    protected abstract OperationNum execute();
+
+    /**
+     * entrance method
+     */
+    public abstract void process();
 
     public abstract AbstractOperation parse(String operation);
 }

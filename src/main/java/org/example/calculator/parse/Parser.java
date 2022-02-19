@@ -1,15 +1,8 @@
 package org.example.calculator.parse;
 
-import org.example.calculator.operations.OperatorEnum;
-import org.example.calculator.common.CmdStack;
-import org.example.calculator.common.ErrorStack;
-import org.example.calculator.common.UndoStack;
-import org.example.calculator.exception.CalculatorException;
 import org.example.calculator.operations.*;
-import org.example.calculator.operations.operator.AddOperator;
-import org.example.calculator.operations.operator.MultiplyOperator;
-import org.example.calculator.operations.operator.SqrtOperator;
-import org.example.calculator.operations.operator.UndoOperator;
+import org.example.calculator.common.ErrorStack;
+import org.example.calculator.exception.CalculatorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,37 +28,29 @@ public class Parser {
                 OperatorEnum operatorEnum = OperatorEnum.getOperator(scanWord.getOperation());
                 switch (operatorEnum) {
                     case ADD:
-                        AddOperator addOperator =
-                                new AddOperator(operatorEnum).parse(scanWord.getOperation());
-                        CmdStack.push(addOperator.execute());
-                        UndoStack.push(addOperator);
+                        new AddOperator(operatorEnum).parse(scanWord.getOperation()).process();
                         break;
                     case MINUS:
+                        new MinusOperator(operatorEnum).parse(scanWord.getOperation()).process();
+                        break;
                     case MULTIPLY:
-                        MultiplyOperator multiplyOperator =
-                                new MultiplyOperator(operatorEnum).parse(scanWord.getOperation());
-                        CmdStack.push(multiplyOperator.execute());
-                        UndoStack.push(multiplyOperator);
+                        new MultiplyOperator(operatorEnum).parse(scanWord.getOperation()).process();
                         break;
                     case DIVIDE:
+                        new DivideOperator(operatorEnum).parse(scanWord.getOperation()).process();
+                        break;
                     case SQRT:
-                        SqrtOperator sqrtOperator =
-                                new SqrtOperator(operatorEnum).parse(scanWord.getOperation());
-                        CmdStack.push(sqrtOperator.execute());
-                        UndoStack.push(sqrtOperator);
+                        new SqrtOperator(operatorEnum).parse(scanWord.getOperation()).process();
                         break;
                     case UNDO:
-                        UndoOperator undoOperator =
-                                new UndoOperator(operatorEnum).parse(scanWord.getOperation());
-                        undoOperator.execute();
+                        new UndoOperator(operatorEnum).parse(scanWord.getOperation()).process();
                         break;
                     case CLEAR:
+                        new ClearOperator(operatorEnum).parse(scanWord.getOperation()).process();
+                        break;
                     case NUM:
                         //解析操作数
-                        OperationNum operationNum =
-                                new OperationNum().parse(scanWord.getOperation());
-                        CmdStack.push(operationNum.execute());
-                        UndoStack.push(operationNum);
+                        new OperationNum().parse(scanWord.getOperation()).process();
                         break;
                     default:
                         break;

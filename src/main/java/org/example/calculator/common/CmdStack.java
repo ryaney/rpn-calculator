@@ -42,6 +42,18 @@ public class CmdStack {
         }
     }
 
+    public static void clear() {
+        try {
+            cmdStack.clear();
+        } catch (EmptyStackException e) {
+            throw new CalculatorException(ErrorCodeEnum.CMD_STACK_ILLEGAL);
+        }
+    }
+
+    public static boolean empty() {
+        return cmdStack.empty();
+    }
+
     public static Stack<OperationNum> getCmdStack() {
         return cmdStack;
     }

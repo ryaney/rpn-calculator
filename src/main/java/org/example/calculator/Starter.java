@@ -23,7 +23,7 @@ public class Starter {
         // Break each line entered into a command and a parameter string
         try {
             Starter starter = new Starter();
-            starter.start(" 5  2 + undo undo 6 + + 1 2 * * ");
+            starter.start(" 5  2 + undo undo 6 -");
 
 //            while (true) {
 //                // Input command from user

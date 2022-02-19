@@ -1,11 +1,8 @@
-package org.example.calculator.operations.operator;
+package org.example.calculator.operations;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.calculator.operations.OperatorEnum;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.UndoStack;
-import org.example.calculator.operations.AbstractOperation;
-import org.example.calculator.operations.OperationNum;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;
@@ -25,19 +22,21 @@ public class UndoOperator extends AbstractOperator {
 
     private AbstractOperation undoOp;
 
-    private OperationNum num0;
-
     @Override
-    public OperationNum execute() {
-
+    protected OperationNum execute() {
         List<OperationNum> operationNums = undoOp.undo();
         CmdStack.push(operationNums);
         return null;
     }
 
     @Override
-    public List<OperationNum> undo() {
+    protected List<OperationNum> undo() {
         return Arrays.asList(undoOp.execute());
+    }
+
+    @Override
+    public void process() {
+        this.execute();
     }
 
     /**
@@ -50,9 +49,6 @@ public class UndoOperator extends AbstractOperator {
     public UndoOperator parse(String symbol) {
         Assert.hasText(symbol, "operation can not be empty");
         Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not undo");
-        //弹出运行时数据
-        num0 = CmdStack.pop();
-        Assert.notNull(num0, "operation num0 can not be null");
         //弹出操作符或操作数
         undoOp = UndoStack.pop();
         Assert.notNull(undoOp, "undo operator can not be null");

@@ -1,8 +1,9 @@
 package org.example.calculator.operations;
 
+import org.example.calculator.common.CmdStack;
+import org.example.calculator.common.UndoStack;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,14 +29,20 @@ public class OperationNum extends AbstractOperation {
     }
 
     @Override
-    public List<OperationNum> undo() {
-        //操作数不能undo
-        return new ArrayList<>();
+    protected List<OperationNum> undo() {
+        CmdStack.pop();
+        return null;
     }
 
     @Override
-    public OperationNum execute() {
+    protected OperationNum execute() {
         return this;
+    }
+
+    @Override
+    public void process() {
+        CmdStack.push(this.execute());
+        UndoStack.push(this);
     }
 
     /**

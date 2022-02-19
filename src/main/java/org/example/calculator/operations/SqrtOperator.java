@@ -1,9 +1,8 @@
-package org.example.calculator.operations.operator;
+package org.example.calculator.operations;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.calculator.operations.OperatorEnum;
 import org.example.calculator.common.CmdStack;
-import org.example.calculator.operations.OperationNum;
+import org.example.calculator.common.UndoStack;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;
@@ -24,14 +23,21 @@ public class SqrtOperator extends AbstractOperator {
     private Double num0;
 
     @Override
-    public OperationNum execute() {
+    protected OperationNum execute() {
         return new OperationNum(Math.sqrt(num0));
     }
 
     @Override
-    public List<OperationNum> undo() {
+    protected List<OperationNum> undo() {
+        CmdStack.pop();
         OperationNum[] mums = new OperationNum[] {new OperationNum(num0)};
         return Arrays.asList(mums);
+    }
+
+    @Override
+    public void process() {
+        CmdStack.push(this.execute());
+        UndoStack.push(this);
     }
 
     /**
