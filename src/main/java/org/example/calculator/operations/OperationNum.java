@@ -60,7 +60,10 @@ public class OperationNum extends AbstractOperation {
 
     @Override
     public String toString() {
-        return operationNum.toString();
+        if (operationNum.intValue() == operationNum) {
+            return String.format("%d", operationNum.intValue());
+        }
+        return String.format("%.10f", operationNum);
     }
 
     public Double getOperationNum() {

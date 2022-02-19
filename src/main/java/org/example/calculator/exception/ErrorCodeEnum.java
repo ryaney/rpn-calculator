@@ -10,7 +10,7 @@ public enum ErrorCodeEnum {
     //cmdStack empty
     CMD_STACK_ILLEGAL("CMD_STACK_ILLEGAL","empty cmdStack"),
     OPERATOR_ILLEGAL("OPERATOR_ILLEGAL","illegal operator"),
-    OPERATOR_PARAM_ILLEGAL("OPERATOR_PARAM_ILLEGAL","insucient parameters"),
+    OPERATOR_PARAM_ILLEGAL("OPERATOR_PARAM_ILLEGAL","insufficient parameters"),
     CMD_LINE_ILLEGAL("CMD_LINE_ILLEGAL", "empty cmdLine");
 
     private String code;
