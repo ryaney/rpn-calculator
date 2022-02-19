@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: common
+Implementation-Version: 1.0.0
+Main-Class: org.example.calculator.Starter
+Created-By: rayney(ryan_scy@126.com)
