@@ -3,6 +3,8 @@ package org.example.calculator.operations;
 import org.apache.commons.lang3.StringUtils;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.UndoStack;
+import org.example.calculator.exception.CalculatorException;
+import org.example.calculator.exception.ErrorCodeEnum;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;
@@ -29,9 +31,13 @@ public class SqrtOperator extends AbstractOperator {
 
     @Override
     protected List<OperationNum> undo() {
-        CmdStack.pop();
-        OperationNum[] mums = new OperationNum[] {new OperationNum(num0)};
-        return Arrays.asList(mums);
+        try {
+            CmdStack.pop();
+            OperationNum[] mums = new OperationNum[]{new OperationNum(num0)};
+            return Arrays.asList(mums);
+        } catch (CalculatorException e) {
+            throw new CalculatorException(ErrorCodeEnum.OPERATOR_PARAM_ILLEGAL);
+        }
     }
 
     @Override

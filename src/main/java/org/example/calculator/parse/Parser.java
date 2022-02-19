@@ -1,5 +1,7 @@
 package org.example.calculator.parse;
 
+import org.example.calculator.common.CmdStack;
+import org.example.calculator.common.UndoStack;
 import org.example.calculator.operations.*;
 import org.example.calculator.common.ErrorStack;
 import org.example.calculator.exception.CalculatorException;
@@ -56,6 +58,8 @@ public class Parser {
                         break;
                 }
             } catch (CalculatorException e) {
+                CmdStack.clear();
+                UndoStack.clear();
                 parseException(e, scanWord);
             }
         }

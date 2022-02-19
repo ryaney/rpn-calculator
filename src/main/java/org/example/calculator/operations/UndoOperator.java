@@ -3,6 +3,8 @@ package org.example.calculator.operations;
 import org.apache.commons.lang3.StringUtils;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.UndoStack;
+import org.example.calculator.exception.CalculatorException;
+import org.example.calculator.exception.ErrorCodeEnum;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;
@@ -50,8 +52,12 @@ public class UndoOperator extends AbstractOperator {
         Assert.hasText(symbol, "operation can not be empty");
         Assert.isTrue(StringUtils.equals(symbol, operator.getSymbol()), "operator is not undo");
         //弹出操作符或操作数
-        undoOp = UndoStack.pop();
-        Assert.notNull(undoOp, "undo operator can not be null");
+        try {
+            undoOp = UndoStack.pop();
+            Assert.notNull(undoOp, "undo operator can not be null");
+        } catch (CalculatorException e) {
+            throw new CalculatorException(ErrorCodeEnum.OPERATOR_PARAM_ILLEGAL);
+        }
 
         return this;
     }

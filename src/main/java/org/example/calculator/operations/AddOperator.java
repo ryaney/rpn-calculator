@@ -2,6 +2,8 @@ package org.example.calculator.operations;
 
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.UndoStack;
+import org.example.calculator.exception.CalculatorException;
+import org.example.calculator.exception.ErrorCodeEnum;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,9 +27,13 @@ public class AddOperator extends AbstractBinaryOperator {
 
     @Override
     protected List<OperationNum> undo() {
-        CmdStack.pop();
-        OperationNum[] mums = new OperationNum[] {new OperationNum(num0), new OperationNum(num1)};
-        return Arrays.asList(mums);
+        try {
+            CmdStack.pop();
+            OperationNum[] mums = new OperationNum[]{new OperationNum(num0), new OperationNum(num1)};
+            return Arrays.asList(mums);
+        } catch (CalculatorException e) {
+            throw new CalculatorException(ErrorCodeEnum.OPERATOR_PARAM_ILLEGAL);
+        }
     }
 
     @Override

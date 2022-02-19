@@ -1,5 +1,7 @@
 package org.example.calculator.common;
 
+import org.example.calculator.exception.CalculatorException;
+import org.example.calculator.exception.ErrorCodeEnum;
 import org.example.calculator.operations.AbstractOperation;
 
 import java.util.EmptyStackException;
@@ -30,7 +32,15 @@ public class UndoStack {
         try {
             return undoStack.pop();
         } catch (EmptyStackException e) {
-            throw new RuntimeException("undoStack is Empty");
+            throw new CalculatorException(ErrorCodeEnum.CMD_STACK_ILLEGAL);
+        }
+    }
+
+    public static void clear() {
+        try {
+            undoStack.clear();
+        } catch (EmptyStackException e) {
+            throw new CalculatorException(ErrorCodeEnum.CMD_STACK_ILLEGAL);
         }
     }
 

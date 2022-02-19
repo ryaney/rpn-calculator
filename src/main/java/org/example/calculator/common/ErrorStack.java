@@ -16,6 +16,10 @@ public class ErrorStack {
         errorStack.push(item);
     }
 
+    public static void clear() {
+        errorStack.clear();
+    }
+
     public static Stack<String> getErrorStack() {
         return errorStack;
     }

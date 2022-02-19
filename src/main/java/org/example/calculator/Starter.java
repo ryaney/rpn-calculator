@@ -1,10 +1,10 @@
 package org.example.calculator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.ErrorStack;
 import org.example.calculator.common.UndoStack;
 import org.example.calculator.parse.Parser;
-import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -19,50 +19,45 @@ public class Starter {
     private Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Starter starter = new Starter();
+        starter.interactive();
+    }
 
-        // Break each line entered into a command and a parameter string
-        try {
-            Starter starter = new Starter();
-            starter.start(" 5  2 + undo undo 6 -");
-
-//            while (true) {
-//                // Input command from user
-//                System.out.print("\n>>  ");
-//                String cmdInput = starter.scanner.nextLine();
-//                String[] ci = cmdInput.toLowerCase().trim().split(" ");
-//
-//                // Call the parser to send the command to the correct function to execute
-//                CommandParser.Parse(cmdInput, cmdInputCmd, cmdInputParam);
-//
-//                // Clear input parameters before we start again
-//                cmdInputCmd = "";
-//                cmdInputParam = "";
-//
-//            } // End While Loop
-//
-//            // Close the scanner
-//            scanner.close();
-//
-//            // Save the items in the memory slots to the preferences system
-//            StackMemory.SaveMemSlots();
-//
-//            // Save the primary and secondary stacks to the preferences system
-//            StackManagement.SaveStack(calcStack, "1");
-//            StackManagement.SaveStack(calcStack2, "2");
-//
-        } catch (RuntimeException e) {
-            e.printStackTrace();
+    /**
+     * 命令行交互
+     * quit命令退出
+     */
+    public void interactive() {
+        while (true) {
+            System.out.print("\n>>  ");
+            /**
+             * start this process
+             * eg:
+             *  >> 5  2 + undo undo 6 -
+             *  [errorMsg]
+             *  stack: [5 2]
+             *  >>quit
+             *  then exit this process
+             */
+            String cmdInput = scanner.nextLine();
+            if (StringUtils.isBlank(cmdInput)) {
+                continue;
+            }
+            if (StringUtils.equals(cmdInput, "quit")) {
+                System.exit(0);
+            }
+            start(cmdInput);
         }
     }
 
     public void start(String inputLine) {
 
-        //parameter check
-        Assert.hasText(inputLine, "input Command can not be empty");
-
         Parser parser = new Parser();
         parser.parseAndExecute(inputLine);
+
+        //异常栈打印完成后，清空异常栈
         ErrorStack.printErrorStack();
+        ErrorStack.clear();
         CmdStack.printCmdStack();
         UndoStack.printUndoStack();
     }
