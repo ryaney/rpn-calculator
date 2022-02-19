@@ -2,7 +2,8 @@ package org.example.calculator;
 
 import org.example.calculator.common.CmdStack;
 import org.example.calculator.common.UndoStack;
-import org.example.calculator.operations.AbstractOperator;
+import org.example.calculator.parse.Parser;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -21,7 +22,7 @@ public class Starter {
         // Break each line entered into a command and a parameter string
         try {
             Starter starter = new Starter();
-            starter.start(new String[]{"5","2","+"});
+            starter.start(" 5  2 + undo undo 6 + + 1 2 undo undo");
 
 //            while (true) {
 //                // Input command from user
@@ -53,16 +54,13 @@ public class Starter {
         }
     }
 
-    public void start(String[] args) {
-        if (args == null) {
-            return;
-        }
+    public void start(String inputLine) {
 
         //parameter check
+        Assert.hasText(inputLine, "input Command can not be empty");
 
         Parser parser = new Parser();
-        List<String> cmdIn = Arrays.asList(args);;
-        parser.parseAndExecute(cmdIn);
+        parser.parseAndExecute(inputLine);
         System.out.println(CmdStack.getCmdStack());
         System.out.println(UndoStack.getUndoStack());
 

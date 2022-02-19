@@ -20,6 +20,8 @@ public enum OperatorEnum {
 
     DIVIDE("divide", "/", "divide operator"),
 
+    SQRT("sqrt", "sqrt", "sqrt operator"),
+
     UNDO("undo", "undo", "undo operator"),
 
     CLEAR("clear", "clear", "clear operator"),

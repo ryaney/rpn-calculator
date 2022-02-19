@@ -1,8 +1,8 @@
 package org.example.calculator.common;
 
 import org.example.calculator.operations.AbstractOperation;
-import org.example.calculator.operations.OperationNum;
 
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -14,23 +14,27 @@ import java.util.Stack;
  */
 public class UndoStack {
     //undo stack
-    private static Stack<OperationNum> undoStack = new Stack<>();
+    private static Stack<AbstractOperation> undoStack = new Stack<>();
 
-    public static void push(OperationNum item) {
+    public static void push(AbstractOperation item) {
         undoStack.push(item);
     }
 
-    public static void push(List<OperationNum> items) {
-        for (OperationNum item : items) {
+    public static void push(List<? extends AbstractOperation> items) {
+        for (AbstractOperation item : items) {
             undoStack.push(item);
         }
     }
 
-    public static OperationNum pop() {
-        return undoStack.pop();
+    public static AbstractOperation pop() {
+        try {
+            return undoStack.pop();
+        } catch (EmptyStackException e) {
+            throw new RuntimeException("undoStack is Empty");
+        }
     }
 
-    public static Stack<OperationNum> getUndoStack() {
+    public static Stack<AbstractOperation> getUndoStack() {
         return undoStack;
     }
 }

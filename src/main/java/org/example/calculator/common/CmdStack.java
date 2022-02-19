@@ -1,7 +1,11 @@
 package org.example.calculator.common;
 
+import org.example.calculator.exception.CalculatorException;
+import org.example.calculator.exception.ErrorCodeEnum;
 import org.example.calculator.operations.OperationNum;
+import org.springframework.util.CollectionUtils;
 
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -21,13 +25,21 @@ public class CmdStack {
     }
 
     public static void push(List<OperationNum> items) {
+        if (CollectionUtils.isEmpty(items)) {
+            return;
+        }
+
         for (OperationNum item : items) {
             cmdStack.push(item);
         }
     }
 
     public static OperationNum pop() {
-        return cmdStack.pop();
+        try {
+            return cmdStack.pop();
+        } catch (EmptyStackException e) {
+            throw new CalculatorException(ErrorCodeEnum.CMD_STACK_ILLEGAL);
+        }
     }
 
     public static Stack<OperationNum> getCmdStack() {

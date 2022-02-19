@@ -2,6 +2,7 @@ package org.example.calculator.operations;
 
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
@@ -30,7 +31,8 @@ public class OperationNum extends AbstractOperation {
 
     @Override
     public List<OperationNum> undo() {
-        return Arrays.asList(this);
+        //操作数不能undo
+        return new ArrayList<>();
     }
 
     @Override
@@ -41,7 +43,7 @@ public class OperationNum extends AbstractOperation {
     /**
      * 根据cmdIn的peek element，解析操作数
      *
-     * @param cmdIn 操作栈
+     * @param operation 操作
      * @return {@link OperationNum}
      */
     @Override
